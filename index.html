@@ -7,8 +7,10 @@
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
     />
     <title>Sorpresa</title>
-    <!-- Solo A-Frame, sin librerías de AR extras -->
+
+    <!-- A-Frame puro sin librerías externas de AR -->
     <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+
     <style>
       body,
       html {
@@ -20,7 +22,7 @@
         background-color: black;
       }
 
-      /* Aquí está la magia: el video de la cámara en formato nativo absoluto */
+      /* Cámara nativa de fondo cubriendo toda la pantalla */
       #camara-fondo {
         position: absolute;
         top: 0;
@@ -31,7 +33,7 @@
         z-index: 1;
       }
 
-      /* Nuestro mundo 3D va transparente encima del video */
+      /* Escena 3D transparente encima de la cámara */
       #escena-ar {
         position: absolute;
         top: 0;
@@ -41,6 +43,7 @@
         z-index: 2;
       }
 
+      /* UI de Inicio y Carga */
       #pantalla-inicio {
         position: absolute;
         z-index: 9999;
@@ -48,14 +51,24 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background-color: rgba(0, 0, 0, 0.85);
+        background-color: rgba(0, 0, 0, 0.9);
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         color: white;
         font-family: sans-serif;
+        text-align: center;
+        padding: 20px;
+        box-sizing: border-box;
       }
+
+      #texto-carga {
+        font-size: 16px;
+        margin-top: 15px;
+        color: #ffcccc;
+      }
+
       button {
         padding: 15px 30px;
         font-size: 18px;
@@ -66,23 +79,50 @@
         cursor: pointer;
         margin-top: 20px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        display: none; /* Oculto hasta que carguen las fotos */
       }
     </style>
   </head>
   <body>
-    <!-- Elemento nativo para la cámara -->
+    <!-- Elemento de video para la cámara real -->
     <video id="camara-fondo" autoplay muted playsinline></video>
 
+    <!-- Interfaz inicial -->
     <div id="pantalla-inicio">
       <h2>Tengo algo para ti...</h2>
-      <p>Sube el volumen y abre la caja</p>
+      <p id="texto-carga">
+        Preparando sorpresa...<br /><small>(puede tomar unos segundos)</small>
+      </p>
       <button id="btn-comenzar">Toca aquí para empezar</button>
     </div>
 
+    <!-- Contenedor AR -->
     <div id="escena-ar">
-      <!-- "renderer=alpha: true" hace que A-Frame sea transparente y deje ver la cámara atrás -->
       <a-scene renderer="alpha: true" vr-mode-ui="enabled: false">
+        <!-- Precarga de todos los recursos -->
         <a-assets>
+          <!-- Pingüinos y Audio -->
+          <img id="ping-saluda" src="./assets/wavingPenguin.png" />
+          <img id="ping-apunta" src="./assets/pointingPenguin.png" />
+          <img id="ping-novia" src="./assets/cardPenguin.png" />
+          <audio
+            id="cancion"
+            src="./assets/AndarConmigo.mp3"
+            preload="auto"
+          ></audio>
+
+          <!-- Letras de la canción -->
+          <img id="letra1" src="./assets/cancionLetra/cancion1.png" />
+          <img id="letra2" src="./assets/cancionLetra/cancion2.png" />
+          <img id="letra3" src="./assets/cancionLetra/cancion3.png" />
+          <img id="letra4" src="./assets/cancionLetra/cancion4.png" />
+          <img id="letra5" src="./assets/cancionLetra/cancion5.png" />
+          <img id="letra6" src="./assets/cancionLetra/cancion6.png" />
+          <img id="letra7" src="./assets/cancionLetra/cancion7.png" />
+          <img id="letra8" src="./assets/cancionLetra/cancion8.png" />
+          <img id="letra9" src="./assets/cancionLetra/cancion9.png" />
+
+          <!-- 24 Fotos para la Esfera -->
           <img id="foto1" src="./assets/1.png" />
           <img id="foto2" src="./assets/2.png" />
           <img id="foto3" src="./assets/3.png" />
@@ -107,36 +147,104 @@
           <img id="foto22" src="./assets/22.png" />
           <img id="foto23" src="./assets/23.png" />
           <img id="foto24" src="./assets/24.png" />
-          <img id="ping-saluda" src="./assets/wavingPenguin.png" />
-          <img id="ping-apunta" src="./assets/pointingPenguin.png" />
-          <img id="ping-novia" src="./assets/cardPenguin.png" />
-          <audio
-            id="cancion"
-            src="./assets/nuevequince.mp3"
-            preload="auto"
-          ></audio>
         </a-assets>
 
         <a-camera position="0 0 0" look-controls></a-camera>
 
+        <!-- Contenedor Maestro -->
         <a-entity id="carrusel" visible="false">
-          <!-- ========================================== -->
-          <!-- ANILLO CENTRAL (A la altura de la vista)   -->
-          <!-- ========================================== -->
-          <!-- Lic. Hielos al frente en el centro -->
+          <!-- PINGÜINO GUÍA AL CENTRO (-1.5 metros para que se vea claro) -->
           <a-image
             id="pinguino-guia"
             src="#ping-saluda"
-            position="0 0 -3.5"
+            position="0 0 -1.5"
             width="2"
             height="2"
           ></a-image>
 
-          <!-- 7 fotos rodeando los lados y la espalda -->
+          <!-- ========================================== -->
+          <!-- LETRAS SINCRONIZADAS (Elevadas a 22.5 grados) -->
+          <!-- ========================================== -->
+          <a-entity rotation="22.5 0 0" id="ent-letra1" visible="false"
+            ><a-image
+              src="#letra1"
+              position="0 0 -3"
+              width="1.6"
+              height="0.9"
+            ></a-image
+          ></a-entity>
+          <a-entity rotation="22.5 -45 0" id="ent-letra2" visible="false"
+            ><a-image
+              src="#letra2"
+              position="0 0 -3"
+              width="1.6"
+              height="0.9"
+            ></a-image
+          ></a-entity>
+          <a-entity rotation="22.5 -90 0" id="ent-letra3" visible="false"
+            ><a-image
+              src="#letra3"
+              position="0 0 -3"
+              width="1.6"
+              height="0.9"
+            ></a-image
+          ></a-entity>
+          <a-entity rotation="22.5 -135 0" id="ent-letra4" visible="false"
+            ><a-image
+              src="#letra4"
+              position="0 0 -3"
+              width="1.6"
+              height="0.9"
+            ></a-image
+          ></a-entity>
+          <a-entity rotation="22.5 -180 0" id="ent-letra5" visible="false"
+            ><a-image
+              src="#letra5"
+              position="0 0 -3"
+              width="1.6"
+              height="0.9"
+            ></a-image
+          ></a-entity>
+          <a-entity rotation="22.5 -225 0" id="ent-letra6" visible="false"
+            ><a-image
+              src="#letra6"
+              position="0 0 -3"
+              width="1.6"
+              height="0.9"
+            ></a-image
+          ></a-entity>
+          <a-entity rotation="22.5 -270 0" id="ent-letra7" visible="false"
+            ><a-image
+              src="#letra7"
+              position="0 0 -3"
+              width="1.6"
+              height="0.9"
+            ></a-image
+          ></a-entity>
+          <a-entity rotation="22.5 -315 0" id="ent-letra8" visible="false"
+            ><a-image
+              src="#letra8"
+              position="0 0 -3"
+              width="1.6"
+              height="0.9"
+            ></a-image
+          ></a-entity>
+          <a-entity rotation="22.5 0 0" id="ent-letra9" visible="false"
+            ><a-image
+              src="#letra9"
+              position="0 0 -3"
+              width="1.6"
+              height="0.9"
+            ></a-image
+          ></a-entity>
+
+          <!-- ========================================== -->
+          <!-- ESFERA DE FOTOS: ANILLO CENTRAL -->
+          <!-- ========================================== -->
           <a-entity rotation="0 45 0"
             ><a-image
               src="#foto1"
-              position="0 0 -3.5"
+              position="0 0 -3"
               width="2"
               height="2.5"
             ></a-image
@@ -144,7 +252,7 @@
           <a-entity rotation="0 90 0"
             ><a-image
               src="#foto2"
-              position="0 0 -3.5"
+              position="0 0 -3"
               width="2"
               height="2.5"
             ></a-image
@@ -152,7 +260,7 @@
           <a-entity rotation="0 135 0"
             ><a-image
               src="#foto3"
-              position="0 0 -3.5"
+              position="0 0 -3"
               width="2"
               height="2.5"
             ></a-image
@@ -160,7 +268,7 @@
           <a-entity rotation="0 180 0"
             ><a-image
               src="#foto4"
-              position="0 0 -3.5"
+              position="0 0 -3"
               width="2"
               height="2.5"
             ></a-image
@@ -168,7 +276,7 @@
           <a-entity rotation="0 225 0"
             ><a-image
               src="#foto5"
-              position="0 0 -3.5"
+              position="0 0 -3"
               width="2"
               height="2.5"
             ></a-image
@@ -176,7 +284,7 @@
           <a-entity rotation="0 270 0"
             ><a-image
               src="#foto6"
-              position="0 0 -3.5"
+              position="0 0 -3"
               width="2"
               height="2.5"
             ></a-image
@@ -184,145 +292,152 @@
           <a-entity rotation="0 315 0"
             ><a-image
               src="#foto7"
-              position="0 0 -3.5"
+              position="0 0 -3"
+              width="2"
+              height="2.5"
+            ></a-image
+          ></a-entity>
+          <!-- Hueco frente a la cámara reservado para el Pingüino Guía -->
+          <a-entity rotation="0 0 0"
+            ><a-image
+              src="#foto8"
+              position="0 0 -3"
               width="2"
               height="2.5"
             ></a-image
           ></a-entity>
 
           <!-- ========================================== -->
-          <!-- ANILLO SUPERIOR (45 grados hacia arriba)   -->
+          <!-- ESFERA DE FOTOS: ANILLO SUPERIOR (45° Arriba) -->
           <!-- ========================================== -->
-          <!-- Nota el "45" en el primer valor de rotation -->
           <a-entity rotation="45 0 0"
             ><a-image
-              src="#foto8"
-              position="0 0 -3.5"
+              src="#foto9"
+              position="0 0 -3"
               width="2"
               height="2.5"
             ></a-image
           ></a-entity>
           <a-entity rotation="45 45 0"
             ><a-image
-              src="#foto9"
-              position="0 0 -3.5"
+              src="#foto10"
+              position="0 0 -3"
               width="2"
               height="2.5"
             ></a-image
           ></a-entity>
           <a-entity rotation="45 90 0"
             ><a-image
-              src="#foto10"
-              position="0 0 -3.5"
+              src="#foto11"
+              position="0 0 -3"
               width="2"
               height="2.5"
             ></a-image
           ></a-entity>
           <a-entity rotation="45 135 0"
             ><a-image
-              src="#foto11"
-              position="0 0 -3.5"
+              src="#foto12"
+              position="0 0 -3"
               width="2"
               height="2.5"
             ></a-image
           ></a-entity>
           <a-entity rotation="45 180 0"
             ><a-image
-              src="#foto12"
-              position="0 0 -3.5"
+              src="#foto13"
+              position="0 0 -3"
               width="2"
               height="2.5"
             ></a-image
           ></a-entity>
           <a-entity rotation="45 225 0"
             ><a-image
-              src="#foto13"
-              position="0 0 -3.5"
+              src="#foto14"
+              position="0 0 -3"
               width="2"
               height="2.5"
             ></a-image
           ></a-entity>
           <a-entity rotation="45 270 0"
             ><a-image
-              src="#foto14"
-              position="0 0 -3.5"
+              src="#foto15"
+              position="0 0 -3"
               width="2"
               height="2.5"
             ></a-image
           ></a-entity>
           <a-entity rotation="45 315 0"
             ><a-image
-              src="#foto15"
-              position="0 0 -3.5"
+              src="#foto16"
+              position="0 0 -3"
               width="2"
               height="2.5"
             ></a-image
           ></a-entity>
 
           <!-- ========================================== -->
-          <!-- ANILLO INFERIOR (45 grados hacia abajo)    -->
+          <!-- ESFERA DE FOTOS: ANILLO INFERIOR (45° Abajo) -->
           <!-- ========================================== -->
-          <!-- Nota el "-45" en el primer valor de rotation -->
           <a-entity rotation="-45 0 0"
             ><a-image
-              src="#foto16"
-              position="0 0 -3.5"
+              src="#foto17"
+              position="0 0 -3"
               width="2"
               height="2.5"
             ></a-image
           ></a-entity>
           <a-entity rotation="-45 45 0"
             ><a-image
-              src="#foto17"
-              position="0 0 -3.5"
+              src="#foto18"
+              position="0 0 -3"
               width="2"
               height="2.5"
             ></a-image
           ></a-entity>
           <a-entity rotation="-45 90 0"
             ><a-image
-              src="#foto18"
-              position="0 0 -3.5"
+              src="#foto19"
+              position="0 0 -3"
               width="2"
               height="2.5"
             ></a-image
           ></a-entity>
           <a-entity rotation="-45 135 0"
             ><a-image
-              src="#foto19"
-              position="0 0 -3.5"
+              src="#foto20"
+              position="0 0 -3"
               width="2"
               height="2.5"
             ></a-image
           ></a-entity>
           <a-entity rotation="-45 180 0"
             ><a-image
-              src="#foto20"
-              position="0 0 -3.5"
+              src="#foto21"
+              position="0 0 -3"
               width="2"
               height="2.5"
             ></a-image
           ></a-entity>
           <a-entity rotation="-45 225 0"
             ><a-image
-              src="#foto21"
-              position="0 0 -3.5"
+              src="#foto22"
+              position="0 0 -3"
               width="2"
               height="2.5"
             ></a-image
           ></a-entity>
           <a-entity rotation="-45 270 0"
             ><a-image
-              src="#foto22"
-              position="0 0 -3.5"
+              src="#foto23"
+              position="0 0 -3"
               width="2"
               height="2.5"
             ></a-image
           ></a-entity>
           <a-entity rotation="-45 315 0"
             ><a-image
-              src="#foto23"
-              position="0 0 -3.5"
+              src="#foto24"
+              position="0 0 -3"
               width="2"
               height="2.5"
             ></a-image
