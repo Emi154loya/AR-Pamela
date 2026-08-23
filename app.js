@@ -1,36 +1,31 @@
 document.addEventListener("DOMContentLoaded", () => {
   const btnComenzar = document.getElementById("btn-comenzar");
   const pantallaInicio = document.getElementById("pantalla-inicio");
-  const objetivoFoto = document.getElementById("objetivo-foto");
   const carrusel = document.getElementById("carrusel");
   const cancion = document.getElementById("cancion");
-  const escena = document.querySelector("a-scene");
   const pinguinoGuia = document.getElementById("pinguino-guia");
 
-  let magiaIniciada = false;
-
   btnComenzar.addEventListener("click", () => {
+    // 1. Quitamos la pantalla de inicio para ver la cámara
     pantallaInicio.style.display = "none";
-    escena.systems["mindar-image-system"].start();
-  });
 
-  objetivoFoto.addEventListener("targetFound", () => {
-    if (magiaIniciada) return;
-    magiaIniciada = true;
-
-    // Inicia música y muestra carrusel
+    // 2. Iniciamos la música inmediatamente
     cancion.play();
+
+    // 3. Mostramos las fotos y a Lic. Hielos en su espacio
     carrusel.setAttribute("visible", "true");
 
-    // A los 5 segundos, el pingüino cambia de saludar a apuntar
+    // 4. A los 5 segundos, el pingüino la invita a voltear
     setTimeout(() => {
       pinguinoGuia.setAttribute("src", "#ping-apunta");
     }, 5000);
 
-    // A los 40 segundos, aparece la pregunta final anclada a la cámara
+    // 5. El gran final a los 40 segundos
     setTimeout(() => {
+      // Ocultamos todo lo demás
       carrusel.setAttribute("visible", "false");
 
+      // Creamos el cartel final y lo pegamos directo a la visión de la cámara
       const camara = document.querySelector("a-camera");
       const cartelFinal = document.createElement("a-image");
       cartelFinal.setAttribute("src", "#ping-novia");

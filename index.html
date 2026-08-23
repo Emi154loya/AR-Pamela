@@ -4,8 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sorpresa</title>
-    <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.2/dist/mindar-image-aframe.prod.js"></script>
+    <!-- Usamos A-Frame 1.3.0 que es el más estable con AR.js -->
+    <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
     <style>
       #pantalla-inicio {
         position: absolute;
@@ -14,7 +15,7 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background-color: rgba(0, 0, 0, 0.8);
+        background-color: rgba(0, 0, 0, 0.85);
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -31,25 +32,24 @@
         border-radius: 10px;
         cursor: pointer;
         margin-top: 20px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
       }
     </style>
   </head>
-  <body>
+  <body style="margin: 0; overflow: hidden">
     <div id="pantalla-inicio">
       <h2>Tengo algo para ti...</h2>
       <p>Sube el volumen y abre la caja</p>
       <button id="btn-comenzar">Toca aquí para empezar</button>
     </div>
 
+    <!-- Escena AR sin marcadores, solo usa la cámara de fondo -->
     <a-scene
-      mindar-image="imageTargetSrc: ./assets/targets.mind; autoStart: false;"
-      color-space="sRGB"
-      renderer="colorManagement: true, physicallyCorrectLights"
+      embedded
+      arjs="sourceType: webcam; debugUIEnabled: false;"
       vr-mode-ui="enabled: false"
-      device-orientation-permission-ui="enabled: false"
     >
       <a-assets>
-        <!-- Tus 7 fotos -->
         <img id="foto1" src="./assets/1.png" />
         <img id="foto2" src="./assets/2.png" />
         <img id="foto3" src="./assets/3.png" />
@@ -57,11 +57,9 @@
         <img id="foto5" src="./assets/5.png" />
         <img id="foto6" src="./assets/6.png" />
         <img id="foto7" src="./assets/7.png" />
-        <!-- Lic. Hielos -->
         <img id="ping-saluda" src="./assets/wavingPenguin.png" />
         <img id="ping-apunta" src="./assets/pointingPenguin.png" />
         <img id="ping-novia" src="./assets/cardPenguin.png" />
-        <!-- Canción -->
         <audio
           id="cancion"
           src="./assets/nuevequince.mp3"
@@ -69,14 +67,11 @@
         ></audio>
       </a-assets>
 
-      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
-      <a-entity
-        mindar-image-target="targetIndex: 0"
-        id="objetivo-foto"
-      ></a-entity>
+      <!-- Cámara central con giroscopio activado -->
+      <a-camera position="0 0 0"></a-camera>
 
+      <!-- El carrusel que la rodeará, oculto hasta que presione Iniciar -->
       <a-entity id="carrusel" visible="false">
-        <!-- Pingüino al centro frente a la cámara -->
         <a-image
           id="pinguino-guia"
           src="#ping-saluda"
@@ -85,7 +80,6 @@
           height="2"
         ></a-image>
 
-        <!-- Distribución matemática de las 7 fotos -->
         <a-entity rotation="0 45 0"
           ><a-image
             src="#foto1"
@@ -144,6 +138,7 @@
         ></a-entity>
       </a-entity>
     </a-scene>
+
     <script src="app.js"></script>
   </body>
 </html>
