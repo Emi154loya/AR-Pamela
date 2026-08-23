@@ -78,7 +78,7 @@ document.addEventListener("DOMContentLoaded", () => {
         cartelFinal.setAttribute("src", "#ping-novia");
 
         // Ajustado para máxima legibilidad justo enfrente
-        cartelFinal.setAttribute("position", "0 0 -1.2");
+        cartelFinal.setAttribute("position", "0 0 -3");
         cartelFinal.setAttribute("width", "2");
         cartelFinal.setAttribute("height", "2.5");
 
