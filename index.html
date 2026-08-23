@@ -34,6 +34,17 @@
         margin-top: 20px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
       }
+      body {
+        margin: 0;
+        overflow: hidden;
+        width: 100vw;
+        height: 100vh;
+      }
+      video {
+        object-fit: cover !important;
+        width: 100vw !important;
+        height: 100vh !important;
+      }
     </style>
   </head>
   <body style="margin: 0; overflow: hidden">
@@ -46,7 +57,7 @@
     <!-- Escena AR sin marcadores, solo usa la cámara de fondo -->
     <a-scene
       embedded
-      arjs="sourceType: webcam; debugUIEnabled: false;"
+      arjs="sourceType: webcam; debugUIEnabled: false; sourceWidth: 1280; sourceHeight: 960; displayWidth: 1280; displayHeight: 960;"
       vr-mode-ui="enabled: false"
     >
       <a-assets>
@@ -75,7 +86,7 @@
         <a-image
           id="pinguino-guia"
           src="#ping-saluda"
-          position="0 0 -4"
+          position="0 0 -6"
           width="2"
           height="2"
         ></a-image>
@@ -83,7 +94,7 @@
         <a-entity rotation="0 45 0"
           ><a-image
             src="#foto1"
-            position="0 0 -4"
+            position="0 0 -6"
             width="2"
             height="2.5"
           ></a-image
@@ -91,7 +102,7 @@
         <a-entity rotation="0 90 0"
           ><a-image
             src="#foto2"
-            position="0 0 -4"
+            position="0 0 -6"
             width="2"
             height="2.5"
           ></a-image
@@ -99,7 +110,7 @@
         <a-entity rotation="0 135 0"
           ><a-image
             src="#foto3"
-            position="0 0 -4"
+            position="0 0 -6"
             width="2"
             height="2.5"
           ></a-image
@@ -107,7 +118,7 @@
         <a-entity rotation="0 180 0"
           ><a-image
             src="#foto4"
-            position="0 0 -4"
+            position="0 0 -6"
             width="2"
             height="2.5"
           ></a-image
@@ -115,7 +126,7 @@
         <a-entity rotation="0 225 0"
           ><a-image
             src="#foto5"
-            position="0 0 -4"
+            position="0 0 -6"
             width="2"
             height="2.5"
           ></a-image
@@ -123,7 +134,7 @@
         <a-entity rotation="0 270 0"
           ><a-image
             src="#foto6"
-            position="0 0 -4"
+            position="0 0 -6"
             width="2"
             height="2.5"
           ></a-image
@@ -131,7 +142,7 @@
         <a-entity rotation="0 315 0"
           ><a-image
             src="#foto7"
-            position="0 0 -4"
+            position="0 0 -6"
             width="2"
             height="2.5"
           ></a-image
