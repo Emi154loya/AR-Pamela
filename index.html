@@ -90,6 +90,23 @@
           <img id="foto5" src="./assets/5.png" />
           <img id="foto6" src="./assets/6.png" />
           <img id="foto7" src="./assets/7.png" />
+          <img id="foto8" src="./assets/8.png" />
+          <img id="foto9" src="./assets/9.png" />
+          <img id="foto10" src="./assets/10.png" />
+          <img id="foto11" src="./assets/11.png" />
+          <img id="foto12" src="./assets/12.png" />
+          <img id="foto13" src="./assets/13.png" />
+          <img id="foto14" src="./assets/14.png" />
+          <img id="foto15" src="./assets/15.png" />
+          <img id="foto16" src="./assets/16.png" />
+          <img id="foto17" src="./assets/17.png" />
+          <img id="foto18" src="./assets/18.png" />
+          <img id="foto19" src="./assets/19.png" />
+          <img id="foto20" src="./assets/20.png" />
+          <img id="foto21" src="./assets/21.png" />
+          <img id="foto22" src="./assets/22.png" />
+          <img id="foto23" src="./assets/23.png" />
+          <img id="foto24" src="./assets/24.png" />
           <img id="ping-saluda" src="./assets/wavingPenguin.png" />
           <img id="ping-apunta" src="./assets/pointingPenguin.png" />
           <img id="ping-novia" src="./assets/cardPenguin.png" />
@@ -102,8 +119,11 @@
 
         <a-camera position="0 0 0" look-controls></a-camera>
 
-        <a-entity id="carrusel" visible="false">
-          <!-- Pingüino guía a solo 1.5 metros de distancia y mucho más grande -->
+        <a-entity id="esfera-fotos" visible="false">
+          <!-- ========================================== -->
+          <!-- ANILLO CENTRAL (A la altura de la vista)   -->
+          <!-- ========================================== -->
+          <!-- Lic. Hielos al frente en el centro -->
           <a-image
             id="pinguino-guia"
             src="#ping-saluda"
@@ -112,7 +132,7 @@
             height="2"
           ></a-image>
 
-          <!-- Fotos muy de cerca y en formato grande -->
+          <!-- 7 fotos rodeando los lados y la espalda -->
           <a-entity rotation="0 45 0"
             ><a-image
               src="#foto1"
@@ -164,6 +184,144 @@
           <a-entity rotation="0 315 0"
             ><a-image
               src="#foto7"
+              position="0 0 -3"
+              width="2"
+              height="2.5"
+            ></a-image
+          ></a-entity>
+
+          <!-- ========================================== -->
+          <!-- ANILLO SUPERIOR (45 grados hacia arriba)   -->
+          <!-- ========================================== -->
+          <!-- Nota el "45" en el primer valor de rotation -->
+          <a-entity rotation="45 0 0"
+            ><a-image
+              src="#foto8"
+              position="0 0 -3"
+              width="2"
+              height="2.5"
+            ></a-image
+          ></a-entity>
+          <a-entity rotation="45 45 0"
+            ><a-image
+              src="#foto9"
+              position="0 0 -3"
+              width="2"
+              height="2.5"
+            ></a-image
+          ></a-entity>
+          <a-entity rotation="45 90 0"
+            ><a-image
+              src="#foto10"
+              position="0 0 -3"
+              width="2"
+              height="2.5"
+            ></a-image
+          ></a-entity>
+          <a-entity rotation="45 135 0"
+            ><a-image
+              src="#foto11"
+              position="0 0 -3"
+              width="2"
+              height="2.5"
+            ></a-image
+          ></a-entity>
+          <a-entity rotation="45 180 0"
+            ><a-image
+              src="#foto12"
+              position="0 0 -3"
+              width="2"
+              height="2.5"
+            ></a-image
+          ></a-entity>
+          <a-entity rotation="45 225 0"
+            ><a-image
+              src="#foto13"
+              position="0 0 -3"
+              width="2"
+              height="2.5"
+            ></a-image
+          ></a-entity>
+          <a-entity rotation="45 270 0"
+            ><a-image
+              src="#foto14"
+              position="0 0 -3"
+              width="2"
+              height="2.5"
+            ></a-image
+          ></a-entity>
+          <a-entity rotation="45 315 0"
+            ><a-image
+              src="#foto15"
+              position="0 0 -3"
+              width="2"
+              height="2.5"
+            ></a-image
+          ></a-entity>
+
+          <!-- ========================================== -->
+          <!-- ANILLO INFERIOR (45 grados hacia abajo)    -->
+          <!-- ========================================== -->
+          <!-- Nota el "-45" en el primer valor de rotation -->
+          <a-entity rotation="-45 0 0"
+            ><a-image
+              src="#foto16"
+              position="0 0 -3"
+              width="2"
+              height="2.5"
+            ></a-image
+          ></a-entity>
+          <a-entity rotation="-45 45 0"
+            ><a-image
+              src="#foto17"
+              position="0 0 -3"
+              width="2"
+              height="2.5"
+            ></a-image
+          ></a-entity>
+          <a-entity rotation="-45 90 0"
+            ><a-image
+              src="#foto18"
+              position="0 0 -3"
+              width="2"
+              height="2.5"
+            ></a-image
+          ></a-entity>
+          <a-entity rotation="-45 135 0"
+            ><a-image
+              src="#foto19"
+              position="0 0 -3"
+              width="2"
+              height="2.5"
+            ></a-image
+          ></a-entity>
+          <a-entity rotation="-45 180 0"
+            ><a-image
+              src="#foto20"
+              position="0 0 -3"
+              width="2"
+              height="2.5"
+            ></a-image
+          ></a-entity>
+          <a-entity rotation="-45 225 0"
+            ><a-image
+              src="#foto21"
+              position="0 0 -3"
+              width="2"
+              height="2.5"
+            ></a-image
+          ></a-entity>
+          <a-entity rotation="-45 270 0"
+            ><a-image
+              src="#foto22"
+              position="0 0 -3"
+              width="2"
+              height="2.5"
+            ></a-image
+          ></a-entity>
+          <a-entity rotation="-45 315 0"
+            ><a-image
+              src="#foto23"
               position="0 0 -3"
               width="2"
               height="2.5"
