@@ -69,20 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (tiempoActual >= 46 && !granFinalMostrado) {
         granFinalMostrado = true;
 
-        // Esconder todo el domo
-        carrusel.setAttribute("visible", "false");
-
-        // Anclar la pregunta directo a la vista de la cámara
-        const camara = document.querySelector("a-camera");
-        const cartelFinal = document.createElement("a-image");
-        cartelFinal.setAttribute("src", "#ping-novia");
-
-        // Ajustado para máxima legibilidad justo enfrente
-        cartelFinal.setAttribute("position", "0 0 -3");
-        cartelFinal.setAttribute("width", "2");
-        cartelFinal.setAttribute("height", "2.5");
-
-        camara.appendChild(cartelFinal);
+        pinguinoGuia.setAttribute("src", "#ping-novia");
       }
     });
   });
