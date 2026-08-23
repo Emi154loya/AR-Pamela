@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const camara = document.querySelector("a-camera");
       const cartelFinal = document.createElement("a-image");
       cartelFinal.setAttribute("src", "#ping-novia");
-      cartelFinal.setAttribute("position", "0 0 -1.2"); // Aún más cerca para el impacto final
+      cartelFinal.setAttribute("position", "0 0 -2"); // Aún más cerca para el impacto final
       cartelFinal.setAttribute("width", "2");
       cartelFinal.setAttribute("height", "2.5");
 
