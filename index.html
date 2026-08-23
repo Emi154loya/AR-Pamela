@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sorpresa</title>
+    <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.2/dist/mindar-image-aframe.prod.js"></script>
+    <style>
+      #pantalla-inicio {
+        position: absolute;
+        z-index: 9999;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.8);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-family: sans-serif;
+      }
+      button {
+        padding: 15px 30px;
+        font-size: 18px;
+        background-color: #ff4d4d;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="pantalla-inicio">
+      <h2>Tengo algo para ti...</h2>
+      <p>Sube el volumen y abre la caja</p>
+      <button id="btn-comenzar">Toca aquí para empezar</button>
+    </div>
+
+    <a-scene
+      mindar-image="imageTargetSrc: ./assets/targets.mind; autoStart: false;"
+      color-space="sRGB"
+      renderer="colorManagement: true, physicallyCorrectLights"
+      vr-mode-ui="enabled: false"
+      device-orientation-permission-ui="enabled: false"
+    >
+      <a-assets>
+        <!-- Tus 7 fotos -->
+        <img id="foto1" src="./assets/1.png" />
+        <img id="foto2" src="./assets/2.png" />
+        <img id="foto3" src="./assets/3.png" />
+        <img id="foto4" src="./assets/4.png" />
+        <img id="foto5" src="./assets/5.png" />
+        <img id="foto6" src="./assets/6.png" />
+        <img id="foto7" src="./assets/7.png" />
+        <!-- Lic. Hielos -->
+        <img id="ping-saluda" src="./assets/wavingPenguin.png" />
+        <img id="ping-apunta" src="./assets/pointingPenguin.png" />
+        <img id="ping-novia" src="./assets/cardPenguin.png" />
+        <!-- Canción -->
+        <audio
+          id="cancion"
+          src="./assets/nuevequince.mp3"
+          preload="auto"
+        ></audio>
+      </a-assets>
+
+      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+      <a-entity
+        mindar-image-target="targetIndex: 0"
+        id="objetivo-foto"
+      ></a-entity>
+
+      <a-entity id="carrusel" visible="false">
+        <!-- Pingüino al centro frente a la cámara -->
+        <a-image
+          id="pinguino-guia"
+          src="#ping-saluda"
+          position="0 0 -4"
+          width="2"
+          height="2"
+        ></a-image>
+
+        <!-- Distribución matemática de las 7 fotos -->
+        <a-entity rotation="0 45 0"
+          ><a-image
+            src="#foto1"
+            position="0 0 -4"
+            width="2"
+            height="2.5"
+          ></a-image
+        ></a-entity>
+        <a-entity rotation="0 90 0"
+          ><a-image
+            src="#foto2"
+            position="0 0 -4"
+            width="2"
+            height="2.5"
+          ></a-image
+        ></a-entity>
+        <a-entity rotation="0 135 0"
+          ><a-image
+            src="#foto3"
+            position="0 0 -4"
+            width="2"
+            height="2.5"
+          ></a-image
+        ></a-entity>
+        <a-entity rotation="0 180 0"
+          ><a-image
+            src="#foto4"
+            position="0 0 -4"
+            width="2"
+            height="2.5"
+          ></a-image
+        ></a-entity>
+        <a-entity rotation="0 225 0"
+          ><a-image
+            src="#foto5"
+            position="0 0 -4"
+            width="2"
+            height="2.5"
+          ></a-image
+        ></a-entity>
+        <a-entity rotation="0 270 0"
+          ><a-image
+            src="#foto6"
+            position="0 0 -4"
+            width="2"
+            height="2.5"
+          ></a-image
+        ></a-entity>
+        <a-entity rotation="0 315 0"
+          ><a-image
+            src="#foto7"
+            position="0 0 -4"
+            width="2"
+            height="2.5"
+          ></a-image
+        ></a-entity>
+      </a-entity>
+    </a-scene>
+    <script src="app.js"></script>
+  </body>
+</html>
