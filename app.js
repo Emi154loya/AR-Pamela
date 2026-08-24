@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Cronología estricta de las letras de la canción
   const lineasLetra = [
     { id: "ent-letra1", inicio: 8, fin: 11 },
-    { id: "ent-letra2", inicio: 12, fin: 14 },
+    { id: "ent-letra2", inicio: 12, fin: 15 },
     { id: "ent-letra3", inicio: 15, fin: 19 },
     { id: "ent-letra4", inicio: 20, fin: 23 },
     { id: "ent-letra5", inicio: 24, fin: 27 },
