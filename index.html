@@ -10,6 +10,7 @@
 
     <!-- A-Frame puro sin librerías externas de AR -->
     <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.2.0/dist/aframe-extras.min.js"></script>
 
     <style>
       body,
@@ -102,9 +103,7 @@
         <!-- Precarga de todos los recursos -->
         <a-assets>
           <!-- Pingüinos y Audio -->
-          <img id="ping-saluda" src="./assets/wavingPenguin.png" />
-          <img id="ping-apunta" src="./assets/pointingPenguin.png" />
-          <img id="ping-novia" src="./assets/cardPenguin.png" />
+          <a-asset-item id="modelo-hielos" src="./LicHielos.glb"></a-asset-item>
           <audio
             id="cancion"
             src="./assets/AndarConmigo.mp3"
@@ -154,13 +153,12 @@
         <!-- Contenedor Maestro -->
         <a-entity id="carrusel" visible="false">
           <!-- PINGÜINO GUÍA AL CENTRO (-1.5 metros para que se vea claro) -->
-          <a-image
+          <a-entity
             id="pinguino-guia"
-            src="#ping-saluda"
-            position="0 0 -3"
-            width="2"
-            height="2"
-          ></a-image>
+            gltf-model="#modelo-hielos"
+            position="0 -1 -3"
+            scale="1.8 1.8 1.8"
+          ></a-entity>
 
           <!-- ========================================== -->
           <!-- LETRAS SINCRONIZADAS (Elevadas a 22.5 grados) -->

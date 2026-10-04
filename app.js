@@ -46,14 +46,12 @@ document.addEventListener("DOMContentLoaded", () => {
     carrusel.setAttribute("visible", "true");
     cancion.play();
 
+    // Iniciar la animación del modelo 3D
+    pinguinoGuia.setAttribute("animation-mixer", "clip: *; loop: once; clampWhenFinished: true;");
+
     // 3. Reloj central: Supervisa cada milisegundo de la canción
     cancion.addEventListener("timeupdate", () => {
       const tiempoActual = cancion.currentTime;
-
-      // Cambio de gesto del Pingüino
-      if (tiempoActual >= 5 && tiempoActual < 6) {
-        pinguinoGuia.setAttribute("src", "#ping-apunta");
-      }
 
       // Controlador matemático de letras (Giroscopio dirigido)
       lineasLetra.forEach((linea) => {
@@ -68,8 +66,6 @@ document.addEventListener("DOMContentLoaded", () => {
       // 4. El Gran Final Inolvidable (Después del segundo 45)
       if (tiempoActual >= 46 && !granFinalMostrado) {
         granFinalMostrado = true;
-
-        pinguinoGuia.setAttribute("src", "#ping-novia");
       }
     });
   });
