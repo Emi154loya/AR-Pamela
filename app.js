@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Liberar el botón solo cuando todos los archivos estén descargados
   assets.addEventListener("loaded", () => {
     textoCarga.style.display = "none";
-    btnComenzar.style.display = "block";
+    btnComenzar.style.display = "flex";
   });
 
   // Cronología estricta de las letras de la canción
@@ -29,27 +29,38 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let granFinalMostrado = false;
 
-  btnComenzar.addEventListener("click", async () => {
-    // 1. Iniciar la cámara pura en el fondo
-    try {
-      const stream = await navigator.mediaDevices.getUserMedia({
-        video: { facingMode: "environment" },
-      });
-      videoFondo.srcObject = stream;
-    } catch (err) {
-      alert("Por favor, acepta los permisos de la cámara para la sorpresa.");
-      return;
-    }
+  btnComenzar.addEventListener("click", () => {
+    // 1. Animación de abrir la carta
+    const envelope = document.getElementById("envelope");
+    if(envelope) envelope.classList.add("open");
 
-    // 2. Ocultar menú e iniciar el carrusel y música
-    pantallaInicio.style.display = "none";
-    carrusel.setAttribute("visible", "true");
-    cancion.play();
+    // Esperar a que termine de abrirse la carta (aprox 2s)
+    setTimeout(async () => {
+      // 2. Solicitar cámara
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({
+          video: { facingMode: "environment" },
+        });
+        videoFondo.srcObject = stream;
+      } catch (err) {
+        alert("Por favor, acepta los permisos de la cámara para la sorpresa.");
+        return;
+      }
 
-    // Iniciar la animación del modelo 3D
-    pinguinoGuia.setAttribute("animation-mixer", "clip: *; loop: once; clampWhenFinished: true;");
+      // 3. Ocultar menú suavemente e iniciar AR
+      pantallaInicio.style.opacity = "0";
+      
+      setTimeout(() => {
+        pantallaInicio.style.display = "none";
+        carrusel.setAttribute("visible", "true");
+        cancion.play();
+        
+        // Iniciar la animación del modelo 3D
+        pinguinoGuia.setAttribute("animation-mixer", "clip: *; loop: once; clampWhenFinished: true;");
+      }, 1000); // 1 segundo para el fade-out
+    }, 2000); // 2 segundos admirando la carta abierta
 
-    // 3. Reloj central: Supervisa cada milisegundo de la canción
+    // 4. Reloj central: Supervisa cada milisegundo de la canción
     cancion.addEventListener("timeupdate", () => {
       const tiempoActual = cancion.currentTime;
 
