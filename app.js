@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
   btnComenzar.addEventListener("click", () => {
     // 1. Animación de abrir la carta
     const envelope = document.getElementById("envelope");
-    if(envelope) envelope.classList.add("open");
+    if (envelope) envelope.classList.add("open");
 
     // Esperar a que termine de abrirse la carta (aprox 2s)
     setTimeout(async () => {
@@ -49,14 +49,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // 3. Ocultar menú suavemente e iniciar AR
       pantallaInicio.style.opacity = "0";
-      
+
       setTimeout(() => {
         pantallaInicio.style.display = "none";
         carrusel.setAttribute("visible", "true");
         cancion.play();
-        
+
         // Iniciar la animación del modelo 3D
-        pinguinoGuia.setAttribute("animation-mixer", "clip: *; loop: once; clampWhenFinished: true;");
+        pinguinoGuia.setAttribute(
+          "animation-mixer",
+          "clip: *; loop: once; clampWhenFinished: true;",
+        );
       }, 1000); // 1 segundo para el fade-out
     }, 2000); // 2 segundos admirando la carta abierta
 
