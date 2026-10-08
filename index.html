@@ -178,51 +178,14 @@
         <a-light type="directional" color="#ffffff" intensity="0.8" position="1 2 1"></a-light>
         
         <!-- Precarga de todos los recursos -->
-        <a-assets>
-          <!-- Pingüinos y Audio -->
+        <!-- Solo el modelo 3D y el audio se precargan (el resto carga en diferido) -->
+        <a-assets timeout="30000">
           <a-asset-item id="modelo-hielos" src="./LicHielos.glb"></a-asset-item>
           <audio
             id="cancion"
             src="./assets/AndarConmigo.mp3"
             preload="auto"
           ></audio>
-
-          <!-- Letras de la canción -->
-          <img id="letra1" src="./assets/cancionLetra/cancion1.png" />
-          <img id="letra2" src="./assets/cancionLetra/cancion2.png" />
-          <img id="letra3" src="./assets/cancionLetra/cancion3.png" />
-          <img id="letra4" src="./assets/cancionLetra/cancion4.png" />
-          <img id="letra5" src="./assets/cancionLetra/cancion5.png" />
-          <img id="letra6" src="./assets/cancionLetra/cancion6.png" />
-          <img id="letra7" src="./assets/cancionLetra/cancion7.png" />
-          <img id="letra8" src="./assets/cancionLetra/cancion8.png" />
-          <img id="letra9" src="./assets/cancionLetra/cancion9.png" />
-
-          <!-- 24 Fotos para la Esfera -->
-          <img id="foto1" src="./assets/fotografias/1.png" />
-          <img id="foto2" src="./assets/fotografias/2.png" />
-          <img id="foto3" src="./assets/fotografias/3.png" />
-          <img id="foto4" src="./assets/fotografias/4.png" />
-          <img id="foto5" src="./assets/fotografias/5.png" />
-          <img id="foto6" src="./assets/fotografias/6.png" />
-          <img id="foto7" src="./assets/fotografias/7.png" />
-          <img id="foto8" src="./assets/fotografias/8.png" />
-          <img id="foto9" src="./assets/fotografias/9.png" />
-          <img id="foto10" src="./assets/fotografias/10.png" />
-          <img id="foto11" src="./assets/fotografias/11.png" />
-          <img id="foto12" src="./assets/fotografias/12.png" />
-          <img id="foto13" src="./assets/fotografias/13.png" />
-          <img id="foto14" src="./assets/fotografias/14.png" />
-          <img id="foto15" src="./assets/fotografias/15.png" />
-          <img id="foto16" src="./assets/fotografias/16.png" />
-          <img id="foto17" src="./assets/fotografias/17.png" />
-          <img id="foto18" src="./assets/fotografias/18.png" />
-          <img id="foto19" src="./assets/fotografias/19.png" />
-          <img id="foto20" src="./assets/fotografias/20.png" />
-          <img id="foto21" src="./assets/fotografias/21.png" />
-          <img id="foto22" src="./assets/fotografias/22.png" />
-          <img id="foto23" src="./assets/fotografias/23.png" />
-          <img id="foto24" src="./assets/fotografias/24.png" />
         </a-assets>
 
         <a-camera position="0 0 0" look-controls></a-camera>
@@ -242,7 +205,7 @@
           <!-- ========================================== -->
           <a-entity rotation="22.5 0 0" id="ent-letra1" visible="false"
             ><a-image
-              src="#letra1"
+              src="./assets/cancionLetra_webp/cancion1.webp"
               position="0 0 -3"
               width="1.6"
               height="0.9"
@@ -250,7 +213,7 @@
           ></a-entity>
           <a-entity rotation="22.5 -45 0" id="ent-letra2" visible="false"
             ><a-image
-              src="#letra2"
+              src="./assets/cancionLetra_webp/cancion2.webp"
               position="0 0 -3"
               width="1.6"
               height="0.9"
@@ -258,7 +221,7 @@
           ></a-entity>
           <a-entity rotation="22.5 -90 0" id="ent-letra3" visible="false"
             ><a-image
-              src="#letra3"
+              src="./assets/cancionLetra_webp/cancion3.webp"
               position="0 0 -3"
               width="1.6"
               height="0.9"
@@ -266,7 +229,7 @@
           ></a-entity>
           <a-entity rotation="22.5 -135 0" id="ent-letra4" visible="false"
             ><a-image
-              src="#letra4"
+              src="./assets/cancionLetra_webp/cancion4.webp"
               position="0 0 -3"
               width="1.6"
               height="0.9"
@@ -274,7 +237,7 @@
           ></a-entity>
           <a-entity rotation="22.5 -180 0" id="ent-letra5" visible="false"
             ><a-image
-              src="#letra5"
+              src="./assets/cancionLetra_webp/cancion5.webp"
               position="0 0 -3"
               width="1.6"
               height="0.9"
@@ -282,7 +245,7 @@
           ></a-entity>
           <a-entity rotation="22.5 -225 0" id="ent-letra6" visible="false"
             ><a-image
-              src="#letra6"
+              src="./assets/cancionLetra_webp/cancion6.webp"
               position="0 0 -3"
               width="1.6"
               height="0.9"
@@ -290,7 +253,7 @@
           ></a-entity>
           <a-entity rotation="22.5 -270 0" id="ent-letra7" visible="false"
             ><a-image
-              src="#letra7"
+              src="./assets/cancionLetra_webp/cancion7.webp"
               position="0 0 -3"
               width="1.6"
               height="0.9"
@@ -298,7 +261,7 @@
           ></a-entity>
           <a-entity rotation="22.5 -315 0" id="ent-letra8" visible="false"
             ><a-image
-              src="#letra8"
+              src="./assets/cancionLetra_webp/cancion8.webp"
               position="0 0 -3"
               width="1.6"
               height="0.9"
@@ -306,7 +269,7 @@
           ></a-entity>
           <a-entity rotation="22.5 0 0" id="ent-letra9" visible="false"
             ><a-image
-              src="#letra9"
+              src="./assets/cancionLetra_webp/cancion9.webp"
               position="0 0 -3"
               width="1.6"
               height="0.9"
@@ -318,7 +281,7 @@
           <!-- ========================================== -->
           <a-entity rotation="0 45 0"
             ><a-image
-              src="#foto1"
+              src="./assets/fotografias_webp/1.webp"
               position="0 0 -3"
               width="2"
               height="2.5"
@@ -326,7 +289,7 @@
           ></a-entity>
           <a-entity rotation="0 90 0"
             ><a-image
-              src="#foto2"
+              src="./assets/fotografias_webp/2.webp"
               position="0 0 -3"
               width="2"
               height="2.5"
@@ -334,7 +297,7 @@
           ></a-entity>
           <a-entity rotation="0 135 0"
             ><a-image
-              src="#foto3"
+              src="./assets/fotografias_webp/3.webp"
               position="0 0 -3"
               width="2"
               height="2.5"
@@ -342,7 +305,7 @@
           ></a-entity>
           <a-entity rotation="0 180 0"
             ><a-image
-              src="#foto4"
+              src="./assets/fotografias_webp/4.webp"
               position="0 0 -3"
               width="2"
               height="2.5"
@@ -350,7 +313,7 @@
           ></a-entity>
           <a-entity rotation="0 225 0"
             ><a-image
-              src="#foto5"
+              src="./assets/fotografias_webp/5.webp"
               position="0 0 -3"
               width="2"
               height="2.5"
@@ -358,7 +321,7 @@
           ></a-entity>
           <a-entity rotation="0 270 0"
             ><a-image
-              src="#foto6"
+              src="./assets/fotografias_webp/6.webp"
               position="0 0 -3"
               width="2"
               height="2.5"
@@ -366,28 +329,20 @@
           ></a-entity>
           <a-entity rotation="0 315 0"
             ><a-image
-              src="#foto7"
+              src="./assets/fotografias_webp/7.webp"
               position="0 0 -3"
               width="2"
               height="2.5"
             ></a-image
           ></a-entity>
           <!-- Hueco frente a la cámara reservado para el Pingüino Guía -->
-          <!-- <a-entity rotation="0 0 0"
-            ><a-image
-              src="#foto8"
-              position="0 0 -3"
-              width="2"
-              height="2.5"
-            ></a-image -->
-          ></a-entity>
 
           <!-- ========================================== -->
           <!-- ESFERA DE FOTOS: ANILLO SUPERIOR (45° Arriba) -->
           <!-- ========================================== -->
           <a-entity rotation="45 0 0"
             ><a-image
-              src="#foto9"
+              src="./assets/fotografias_webp/9.webp"
               position="0 0 -3"
               width="2"
               height="2.5"
@@ -395,7 +350,7 @@
           ></a-entity>
           <a-entity rotation="45 45 0"
             ><a-image
-              src="#foto10"
+              src="./assets/fotografias_webp/10.webp"
               position="0 0 -3"
               width="2"
               height="2.5"
@@ -403,7 +358,7 @@
           ></a-entity>
           <a-entity rotation="45 90 0"
             ><a-image
-              src="#foto11"
+              src="./assets/fotografias_webp/11.webp"
               position="0 0 -3"
               width="2"
               height="2.5"
@@ -411,7 +366,7 @@
           ></a-entity>
           <a-entity rotation="45 135 0"
             ><a-image
-              src="#foto12"
+              src="./assets/fotografias_webp/12.webp"
               position="0 0 -3"
               width="2"
               height="2.5"
@@ -419,7 +374,7 @@
           ></a-entity>
           <a-entity rotation="45 180 0"
             ><a-image
-              src="#foto13"
+              src="./assets/fotografias_webp/13.webp"
               position="0 0 -3"
               width="2"
               height="2.5"
@@ -427,7 +382,7 @@
           ></a-entity>
           <a-entity rotation="45 225 0"
             ><a-image
-              src="#foto14"
+              src="./assets/fotografias_webp/14.webp"
               position="0 0 -3"
               width="2"
               height="2.5"
@@ -435,7 +390,7 @@
           ></a-entity>
           <a-entity rotation="45 270 0"
             ><a-image
-              src="#foto15"
+              src="./assets/fotografias_webp/15.webp"
               position="0 0 -3"
               width="2"
               height="2.5"
@@ -443,7 +398,7 @@
           ></a-entity>
           <a-entity rotation="45 315 0"
             ><a-image
-              src="#foto16"
+              src="./assets/fotografias_webp/16.webp"
               position="0 0 -3"
               width="2"
               height="2.5"
@@ -455,7 +410,7 @@
           <!-- ========================================== -->
           <a-entity rotation="-45 0 0"
             ><a-image
-              src="#foto17"
+              src="./assets/fotografias_webp/17.webp"
               position="0 0 -3"
               width="2"
               height="2.5"
@@ -463,7 +418,7 @@
           ></a-entity>
           <a-entity rotation="-45 45 0"
             ><a-image
-              src="#foto18"
+              src="./assets/fotografias_webp/18.webp"
               position="0 0 -3"
               width="2"
               height="2.5"
@@ -471,7 +426,7 @@
           ></a-entity>
           <a-entity rotation="-45 90 0"
             ><a-image
-              src="#foto19"
+              src="./assets/fotografias_webp/19.webp"
               position="0 0 -3"
               width="2"
               height="2.5"
@@ -479,7 +434,7 @@
           ></a-entity>
           <a-entity rotation="-45 135 0"
             ><a-image
-              src="#foto20"
+              src="./assets/fotografias_webp/20.webp"
               position="0 0 -3"
               width="2"
               height="2.5"
@@ -487,7 +442,7 @@
           ></a-entity>
           <a-entity rotation="-45 180 0"
             ><a-image
-              src="#foto21"
+              src="./assets/fotografias_webp/21.webp"
               position="0 0 -3"
               width="2"
               height="2.5"
@@ -495,7 +450,7 @@
           ></a-entity>
           <a-entity rotation="-45 225 0"
             ><a-image
-              src="#foto22"
+              src="./assets/fotografias_webp/22.webp"
               position="0 0 -3"
               width="2"
               height="2.5"
@@ -503,7 +458,7 @@
           ></a-entity>
           <a-entity rotation="-45 270 0"
             ><a-image
-              src="#foto23"
+              src="./assets/fotografias_webp/23.webp"
               position="0 0 -3"
               width="2"
               height="2.5"
@@ -511,7 +466,7 @@
           ></a-entity>
           <a-entity rotation="-45 315 0"
             ><a-image
-              src="#foto24"
+              src="./assets/fotografias_webp/24.webp"
               position="0 0 -3"
               width="2"
               height="2.5"
