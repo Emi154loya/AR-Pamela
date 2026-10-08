@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const btnComenzar = document.getElementById("open-proposal-btn");
+  const btnComenzar = document.getElementById("btn-comenzar");
   const textoCarga = document.getElementById("texto-carga");
   const pantallaInicio = document.getElementById("pantalla-inicio");
   const carrusel = document.getElementById("carrusel");
@@ -10,7 +10,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Liberar el botón solo cuando todos los archivos estén descargados
   assets.addEventListener("loaded", () => {
-    if (textoCarga) textoCarga.style.display = "none";
+    textoCarga.style.display = "none";
+    btnComenzar.style.display = "flex";
   });
 
   // Cronología estricta de las letras de la canción
