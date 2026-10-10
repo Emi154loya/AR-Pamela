@@ -12,48 +12,6 @@
     <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.2.0/dist/aframe-extras.min.js"></script>
 
-    <link href="https://fonts.googleapis.com" rel="preconnect"/>
-    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <script id="tailwind-config">
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              "primary": "#be123c",
-              "primary-hover": "#9f1239",
-              "rose-deep": "#be123c",
-              "rose-glow": "#e11d48",
-              "sky-soft": "#e0f2fe",
-              "sky-subtle": "#f0f9ff",
-              "sky-accent": "#38bdf8",
-              "sky-dark": "#0284c7",
-              "lavender-light": "#f5f3ff",
-              "lavender-soft": "#ede9fe",
-              "lavender-accent": "#c4b5fd",
-              "lavender-deep": "#7c3aed",
-              "surface-card": "#ffffff",
-              "surface-muted": "#f8fafc",
-              "text-main": "#0f172a",
-              "text-sub": "#64748b",
-              "text-muted": "#94a3b8"
-            },
-            borderRadius: {
-              "DEFAULT": "1rem",
-              "lg": "1.75rem",
-              "xl": "2.25rem",
-              "full": "9999px"
-            },
-            fontFamily: {
-              "headline-serif": ["Playfair Display", "serif"],
-              "body-sans": ["Plus Jakarta Sans", "sans-serif"]
-            }
-          }
-        }
-      };
-    </script>
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
@@ -61,113 +19,64 @@
     <video id="camara-fondo" autoplay muted playsinline></video>
 
     <!-- Interfaz inicial -->
-    <div id="pantalla-inicio" class="bg-gradient-to-b from-purple-50 via-sky-50 to-purple-50 text-text-main antialiased relative overflow-x-hidden selection:bg-rose-glow selection:text-white font-body-sans bg-white">
-      
-      <!-- Pantalla de carga -->
-      <div id="texto-carga" class="absolute inset-0 z-[10000] flex flex-col items-center justify-center bg-white/80 backdrop-blur-sm">
-        <p class="text-rose-deep font-headline-serif text-2xl animate-pulse">Preparando sorpresa...</p>
-        <p class="text-text-sub font-body-sans mt-2 text-sm">(puede tomar unos segundos)</p>
-      </div>
-
-      <!-- Background ambient shapes -->
-      <div class="absolute inset-0 pointer-events-none z-0 overflow-hidden">
-        <div class="absolute -top-16 -left-16 w-80 h-80 rounded-full bg-[#f3e8ff]/80 blur-3xl"></div>
-        <div class="absolute top-10 -right-20 w-72 h-72 rounded-full bg-[#e0f2fe]/85 blur-3xl"></div>
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full bg-[#ede9fe]/50 blur-[100px]"></div>
-        <div class="absolute bottom-10 -left-10 w-80 h-80 rounded-full bg-[#bae6fd]/40 blur-3xl"></div>
-        <div class="absolute -bottom-10 right-0 w-80 h-80 rounded-full bg-[#f5f3ff]/90 blur-3xl"></div>
-      </div>
-
-      <main class="relative z-10 flex flex-col min-h-[100vh] h-full w-full max-w-md mx-auto px-5 py-4 justify-between">
-        <!-- Top Section: Header Badge & Titles -->
-        <div class="w-full pt-3">
-          <!-- Main Title -->
-          <div class="text-left mb-3">
-            <h1 class="font-headline-serif text-[32px] sm:text-[36px] font-semibold text-slate-900 leading-tight">
-              Para <span class="text-rose-deep italic">Pamela</span>
-            </h1>
-            <p class="text-[13px] text-text-sub mt-1 leading-relaxed flex items-center gap-1.5">
-              <span>Donde cada día a tu lado se siente como el ronroneo más cálido</span>
-              <span class="text-rose-glow select-none">🐾</span>
-            </p>
-          </div>
-          <!-- Main Character Illustration Card -->
-          <div class="relative w-full rounded-2xl shadow-[0_10px_30px_-10px_rgba(99,102,241,0.08)] overflow-hidden">
-            <img alt="Ilustración romántica con Pamela y gatito" class="w-full aspect-[4/3] object-cover relative z-10 transition-transform duration-500 hover:scale-[1.02]" src="./assets/img_doodle.jpg"/>
-            <div class="absolute bottom-2.5 right-2.5 z-20 inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-white/95 backdrop-blur-md border border-purple-100 shadow-sm">
-              <span class="material-symbols-outlined text-[13px] text-rose-glow" style='font-variation-settings: "FILL" 1;'>favorite</span>
-              <span class="text-[11px] font-medium text-slate-700">Tú &amp; Yo</span>
-            </div>
-          </div>
-          <!-- Romantic Quote Card -->
-          <div class="mt-3 p-4 rounded-2xl bg-white/90 backdrop-blur-md border border-purple-100/80 shadow-[0_4px_20px_-4px_rgba(124,58,237,0.06)]">
-            <div class="flex items-start gap-2.5">
-              <span class="material-symbols-outlined text-rose-deep text-2xl shrink-0 -mt-1 select-none" style='font-variation-settings: "FILL" 1;'>format_quote</span>
-              <div>
-                <h2 class="font-headline-serif italic text-[16px] font-medium text-slate-900 leading-snug">
-                  “Eres la casualidad más linda que me ha pasado.”
-                </h2>
-                <p class="font-body-sans text-[13px] text-text-sub mt-1.5 leading-relaxed">
-                  Contigo todo es más cálido y bonito, como una tarde de lluvia abrazados y el suave ronroneo de nuestro compañero felino a nuestro lado.
-                </p>
-              </div>
-            </div>
-          </div>
+    <div id="pantalla-inicio" class="background">
+      <h1>Para <span>Pamela</span></h1>
+      <img src="./assets/img_doodle.jpg" alt="" />
+      <div class="card">
+        <div class="content">
+          <h2 class="title">Dime Que Si</h2>
+          <p>Y es así, así, así</p>
+          <p>Es como cafeína que no me deja dormir</p>
+          <p>Y es así así así, me hace tan feliz</p>
+          <p>Ella no sabe lo que me hace</p>
+          <p>Que si la tengo cerquita me quita</p>
+          <p>Todos mis poderes como kriptonita</p>
+          <p>Ella no sabe lo que me hace</p>
+          <p>Que su sonrisa me alegra los días</p>
+          <p>Y que su voz, la mejor melodía</p>
+          <p>Y si dice que sí, me cambia la vida</p>
+          <p>Ay, dime que sí</p>
         </div>
-
-        <!-- Bottom Section: Interactive Love Letter Envelope Component -->
-        <div class="w-full pt-4 pb-2">
-          <div class="w-full flex flex-col items-center">
-            <div class="invitation-hint transition-all duration-300 flex items-center gap-1.5 mb-2 text-xs font-medium text-rose-deep/90 select-none">
-              <span class="animate-bounce">💌</span>
-              <span>Toca el sobre para abrir tu sorpresa</span>
-              <span class="text-[11px] text-purple-400">✨</span>
-            </div>
-            <div aria-label="Abrir sobre con carta de amor" class="envelope-perspective relative w-full max-w-[340px] h-[142px] cursor-pointer select-none group" id="romantic-envelope" role="button" tabindex="0">
-              <div class="absolute inset-0 rounded-2xl bg-gradient-to-b from-[#eef2ff] to-[#e0e7ff] border border-purple-200/80 shadow-[0_12px_28px_-6px_rgba(99,102,241,0.2)] overflow-hidden">
-                <div class="absolute inset-0 opacity-25 bg-[radial-gradient(#7c3aed_1px,transparent_1px)] [background-size:10px_10px]"></div>
-              </div>
-              <div class="envelope-paper absolute left-3 right-3 top-3 h-[132px] rounded-xl bg-white border border-purple-100 p-3 z-10 flex flex-col justify-between overflow-hidden" id="envelope-letter">
-                <div class="flex items-start justify-between">
-                  <div class="flex items-center gap-1.5">
-                    <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-rose-50 text-[11px] text-rose-deep">💌</span>
-                    <span class="font-headline-serif italic text-[13px] font-semibold text-rose-deep">¡Aquí está tu sorpresa!</span>
-                  </div>
-                  <span class="text-[11px] text-purple-400 select-none">🐾 Para ti</span>
-                </div>
-                <div class="py-0.5" id="sorpresa-content">
-                  <p class="font-headline-serif text-[12px] text-slate-800 font-medium leading-snug">
-                    Un mensaje especial hecho con todo el corazón...
-                  </p>
-                  <p class="text-[10.5px] text-text-sub mt-0.5 line-clamp-1 leading-normal">
-                    Toca aquí abajo para ver lo que siempre quise preguntarte
-                  </p>
-                </div>
-                <button class="w-full py-1.5 px-3 rounded-lg bg-gradient-to-r from-rose-deep to-rose-glow hover:brightness-105 active:scale-[0.98] text-white font-semibold text-[11.5px] shadow-sm flex items-center justify-center gap-1.5 transition-all cursor-pointer" id="open-proposal-btn">
-                  <span class="text-[12px]">🌹</span>
-                  <span>Descubrir la gran pregunta</span>
-                  <span class="text-[9px]">✨</span>
-                </button>
-              </div>
-              <div class="absolute inset-0 pointer-events-none z-20 overflow-hidden rounded-2xl">
-                <div class="absolute left-0 bottom-0 top-0 w-1/2 bg-gradient-to-tr from-[#ede9fe] to-[#f5f3ff] [clip-path:polygon(0_0,0_100%,100%_100%)] shadow-sm"></div>
-                <div class="absolute right-0 bottom-0 top-0 w-1/2 bg-gradient-to-tl from-[#e0e7ff] to-[#f0f4ff] [clip-path:polygon(100%_0,0_100%,100%_100%)] shadow-sm"></div>
-                <div class="absolute left-0 right-0 bottom-0 h-[88px] bg-gradient-to-t from-[#e9d5ff] via-[#f3e8ff] to-[#ede9fe] [clip-path:polygon(0_100%,50%_15%,100%_100%)] border-b border-purple-200/60 shadow-sm"></div>
-              </div>
-              <div class="envelope-top-flap absolute inset-x-0 top-0 h-[82px] pointer-events-none">
-                <div class="w-full h-full bg-gradient-to-b from-[#f5f3ff] via-[#ede9fe] to-[#ddd6fe] [clip-path:polygon(0_0,100%_0,50%_100%)] shadow-[0_4px_12px_rgba(99,102,241,0.12)] border-t border-white/80"></div>
-              </div>
-              <div class="wax-seal-btn absolute left-1/2 top-[76px] -translate-x-1/2 -translate-y-1/2 z-40 transition-all duration-300 pointer-events-none flex flex-col items-center">
-                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-rose-glow via-rose-deep to-[#880824] shadow-md border-2 border-purple-200 flex items-center justify-center animate-seal-glow">
-                  <span class="text-white text-[16px] select-none transform hover:scale-110 transition-transform">🐾</span>
-                </div>
-                <span class="mt-1 px-2 py-0.5 rounded-full bg-white/95 backdrop-blur-xs text-[8.5px] font-semibold tracking-wider text-rose-deep shadow-xs border border-purple-100 uppercase">Toca aquí</span>
-              </div>
+      </div>
+      <div class="envelope-prompt">
+        <span>Abre el sobrecito :3</span>
+      </div>
+      <!-- Contenedor del Sobre interactivo -->
+      <div class="envelope-wrapper">
+        <div class="envelope" id="envelope">
+          <!-- Card de fondo -->
+          <div class="envelope-card-bg">
+            <div class="letter-content">
+              <span class="letter-heart">&#9829;</span>
+              <p class="letter-title">Para Pamela</p>
+              <button type="button" class="letter-btn" id="letterBtn">Yo digo que le des click aqu&iacute; ;3</button>
             </div>
           </div>
-        </div>
 
-      </main>
+          <!-- Figura de sobre: 4 triángulos saliendo de los laterales tocándose en el centro -->
+          <!-- Flaps laterales e inferior -->
+          <div class="envelope-pocket">
+            <div class="flap flap-left"></div>
+            <div class="flap flap-right"></div>
+            <div class="flap flap-bottom"></div>
+          </div>
+
+          <!-- Tapa superior que nace de la arista superior -->
+          <div class="flap flap-top" id="flapTop"></div>
+
+          <!-- Botón sello de cera en el centro donde se juntan todas las puntas -->
+          <button
+            type="button"
+            class="wax-seal"
+            id="waxSealBtn"
+            aria-label="Abrir sobre de carta"
+          >
+            <span class="wax-seal-rim">
+              <span class="wax-heart">&#9829;</span>
+            </span>
+          </button>
+        </div>
+      </div>
     </div>
 
     <!-- Contenedor AR -->
@@ -178,14 +87,51 @@
         <a-light type="directional" color="#ffffff" intensity="0.8" position="1 2 1"></a-light>
         
         <!-- Precarga de todos los recursos -->
-        <!-- Solo el modelo 3D y el audio se precargan (el resto carga en diferido) -->
-        <a-assets timeout="30000">
+        <a-assets>
+          <!-- Pingüinos y Audio -->
           <a-asset-item id="modelo-hielos" src="./LicHielos.glb"></a-asset-item>
           <audio
             id="cancion"
             src="./assets/AndarConmigo.mp3"
             preload="auto"
           ></audio>
+
+          <!-- Letras de la canción -->
+          <img id="letra1" src="./assets/cancionLetra/cancion1.png" />
+          <img id="letra2" src="./assets/cancionLetra/cancion2.png" />
+          <img id="letra3" src="./assets/cancionLetra/cancion3.png" />
+          <img id="letra4" src="./assets/cancionLetra/cancion4.png" />
+          <img id="letra5" src="./assets/cancionLetra/cancion5.png" />
+          <img id="letra6" src="./assets/cancionLetra/cancion6.png" />
+          <img id="letra7" src="./assets/cancionLetra/cancion7.png" />
+          <img id="letra8" src="./assets/cancionLetra/cancion8.png" />
+          <img id="letra9" src="./assets/cancionLetra/cancion9.png" />
+
+          <!-- 24 Fotos para la Esfera -->
+          <img id="foto1" src="./assets/fotografias/1.png" />
+          <img id="foto2" src="./assets/fotografias/2.png" />
+          <img id="foto3" src="./assets/fotografias/3.png" />
+          <img id="foto4" src="./assets/fotografias/4.png" />
+          <img id="foto5" src="./assets/fotografias/5.png" />
+          <img id="foto6" src="./assets/fotografias/6.png" />
+          <img id="foto7" src="./assets/fotografias/7.png" />
+          <img id="foto8" src="./assets/fotografias/8.png" />
+          <img id="foto9" src="./assets/fotografias/9.png" />
+          <img id="foto10" src="./assets/fotografias/10.png" />
+          <img id="foto11" src="./assets/fotografias/11.png" />
+          <img id="foto12" src="./assets/fotografias/12.png" />
+          <img id="foto13" src="./assets/fotografias/13.png" />
+          <img id="foto14" src="./assets/fotografias/14.png" />
+          <img id="foto15" src="./assets/fotografias/15.png" />
+          <img id="foto16" src="./assets/fotografias/16.png" />
+          <img id="foto17" src="./assets/fotografias/17.png" />
+          <img id="foto18" src="./assets/fotografias/18.png" />
+          <img id="foto19" src="./assets/fotografias/19.png" />
+          <img id="foto20" src="./assets/fotografias/20.png" />
+          <img id="foto21" src="./assets/fotografias/21.png" />
+          <img id="foto22" src="./assets/fotografias/22.png" />
+          <img id="foto23" src="./assets/fotografias/23.png" />
+          <img id="foto24" src="./assets/fotografias/24.png" />
         </a-assets>
 
         <a-camera position="0 0 0" look-controls></a-camera>
@@ -205,7 +151,7 @@
           <!-- ========================================== -->
           <a-entity rotation="22.5 0 0" id="ent-letra1" visible="false"
             ><a-image
-              src="./assets/cancionLetra_webp/cancion1.webp"
+              src="#letra1"
               position="0 0 -3"
               width="1.6"
               height="0.9"
@@ -213,7 +159,7 @@
           ></a-entity>
           <a-entity rotation="22.5 -45 0" id="ent-letra2" visible="false"
             ><a-image
-              src="./assets/cancionLetra_webp/cancion2.webp"
+              src="#letra2"
               position="0 0 -3"
               width="1.6"
               height="0.9"
@@ -221,7 +167,7 @@
           ></a-entity>
           <a-entity rotation="22.5 -90 0" id="ent-letra3" visible="false"
             ><a-image
-              src="./assets/cancionLetra_webp/cancion3.webp"
+              src="#letra3"
               position="0 0 -3"
               width="1.6"
               height="0.9"
@@ -229,7 +175,7 @@
           ></a-entity>
           <a-entity rotation="22.5 -135 0" id="ent-letra4" visible="false"
             ><a-image
-              src="./assets/cancionLetra_webp/cancion4.webp"
+              src="#letra4"
               position="0 0 -3"
               width="1.6"
               height="0.9"
@@ -237,7 +183,7 @@
           ></a-entity>
           <a-entity rotation="22.5 -180 0" id="ent-letra5" visible="false"
             ><a-image
-              src="./assets/cancionLetra_webp/cancion5.webp"
+              src="#letra5"
               position="0 0 -3"
               width="1.6"
               height="0.9"
@@ -245,7 +191,7 @@
           ></a-entity>
           <a-entity rotation="22.5 -225 0" id="ent-letra6" visible="false"
             ><a-image
-              src="./assets/cancionLetra_webp/cancion6.webp"
+              src="#letra6"
               position="0 0 -3"
               width="1.6"
               height="0.9"
@@ -253,7 +199,7 @@
           ></a-entity>
           <a-entity rotation="22.5 -270 0" id="ent-letra7" visible="false"
             ><a-image
-              src="./assets/cancionLetra_webp/cancion7.webp"
+              src="#letra7"
               position="0 0 -3"
               width="1.6"
               height="0.9"
@@ -261,7 +207,7 @@
           ></a-entity>
           <a-entity rotation="22.5 -315 0" id="ent-letra8" visible="false"
             ><a-image
-              src="./assets/cancionLetra_webp/cancion8.webp"
+              src="#letra8"
               position="0 0 -3"
               width="1.6"
               height="0.9"
@@ -269,7 +215,7 @@
           ></a-entity>
           <a-entity rotation="22.5 0 0" id="ent-letra9" visible="false"
             ><a-image
-              src="./assets/cancionLetra_webp/cancion9.webp"
+              src="#letra9"
               position="0 0 -3"
               width="1.6"
               height="0.9"
@@ -281,7 +227,7 @@
           <!-- ========================================== -->
           <a-entity rotation="0 45 0"
             ><a-image
-              src="./assets/fotografias_webp/1.webp"
+              src="#foto1"
               position="0 0 -3"
               width="2"
               height="2.5"
@@ -289,7 +235,7 @@
           ></a-entity>
           <a-entity rotation="0 90 0"
             ><a-image
-              src="./assets/fotografias_webp/2.webp"
+              src="#foto2"
               position="0 0 -3"
               width="2"
               height="2.5"
@@ -297,7 +243,7 @@
           ></a-entity>
           <a-entity rotation="0 135 0"
             ><a-image
-              src="./assets/fotografias_webp/3.webp"
+              src="#foto3"
               position="0 0 -3"
               width="2"
               height="2.5"
@@ -305,7 +251,7 @@
           ></a-entity>
           <a-entity rotation="0 180 0"
             ><a-image
-              src="./assets/fotografias_webp/4.webp"
+              src="#foto4"
               position="0 0 -3"
               width="2"
               height="2.5"
@@ -313,7 +259,7 @@
           ></a-entity>
           <a-entity rotation="0 225 0"
             ><a-image
-              src="./assets/fotografias_webp/5.webp"
+              src="#foto5"
               position="0 0 -3"
               width="2"
               height="2.5"
@@ -321,7 +267,7 @@
           ></a-entity>
           <a-entity rotation="0 270 0"
             ><a-image
-              src="./assets/fotografias_webp/6.webp"
+              src="#foto6"
               position="0 0 -3"
               width="2"
               height="2.5"
@@ -329,20 +275,28 @@
           ></a-entity>
           <a-entity rotation="0 315 0"
             ><a-image
-              src="./assets/fotografias_webp/7.webp"
+              src="#foto7"
               position="0 0 -3"
               width="2"
               height="2.5"
             ></a-image
           ></a-entity>
           <!-- Hueco frente a la cámara reservado para el Pingüino Guía -->
+          <!-- <a-entity rotation="0 0 0"
+            ><a-image
+              src="#foto8"
+              position="0 0 -3"
+              width="2"
+              height="2.5"
+            ></a-image -->
+          ></a-entity>
 
           <!-- ========================================== -->
           <!-- ESFERA DE FOTOS: ANILLO SUPERIOR (45° Arriba) -->
           <!-- ========================================== -->
           <a-entity rotation="45 0 0"
             ><a-image
-              src="./assets/fotografias_webp/9.webp"
+              src="#foto9"
               position="0 0 -3"
               width="2"
               height="2.5"
@@ -350,7 +304,7 @@
           ></a-entity>
           <a-entity rotation="45 45 0"
             ><a-image
-              src="./assets/fotografias_webp/10.webp"
+              src="#foto10"
               position="0 0 -3"
               width="2"
               height="2.5"
@@ -358,7 +312,7 @@
           ></a-entity>
           <a-entity rotation="45 90 0"
             ><a-image
-              src="./assets/fotografias_webp/11.webp"
+              src="#foto11"
               position="0 0 -3"
               width="2"
               height="2.5"
@@ -366,7 +320,7 @@
           ></a-entity>
           <a-entity rotation="45 135 0"
             ><a-image
-              src="./assets/fotografias_webp/12.webp"
+              src="#foto12"
               position="0 0 -3"
               width="2"
               height="2.5"
@@ -374,7 +328,7 @@
           ></a-entity>
           <a-entity rotation="45 180 0"
             ><a-image
-              src="./assets/fotografias_webp/13.webp"
+              src="#foto13"
               position="0 0 -3"
               width="2"
               height="2.5"
@@ -382,7 +336,7 @@
           ></a-entity>
           <a-entity rotation="45 225 0"
             ><a-image
-              src="./assets/fotografias_webp/14.webp"
+              src="#foto14"
               position="0 0 -3"
               width="2"
               height="2.5"
@@ -390,7 +344,7 @@
           ></a-entity>
           <a-entity rotation="45 270 0"
             ><a-image
-              src="./assets/fotografias_webp/15.webp"
+              src="#foto15"
               position="0 0 -3"
               width="2"
               height="2.5"
@@ -398,7 +352,7 @@
           ></a-entity>
           <a-entity rotation="45 315 0"
             ><a-image
-              src="./assets/fotografias_webp/16.webp"
+              src="#foto16"
               position="0 0 -3"
               width="2"
               height="2.5"
@@ -410,7 +364,7 @@
           <!-- ========================================== -->
           <a-entity rotation="-45 0 0"
             ><a-image
-              src="./assets/fotografias_webp/17.webp"
+              src="#foto17"
               position="0 0 -3"
               width="2"
               height="2.5"
@@ -418,7 +372,7 @@
           ></a-entity>
           <a-entity rotation="-45 45 0"
             ><a-image
-              src="./assets/fotografias_webp/18.webp"
+              src="#foto18"
               position="0 0 -3"
               width="2"
               height="2.5"
@@ -426,7 +380,7 @@
           ></a-entity>
           <a-entity rotation="-45 90 0"
             ><a-image
-              src="./assets/fotografias_webp/19.webp"
+              src="#foto19"
               position="0 0 -3"
               width="2"
               height="2.5"
@@ -434,7 +388,7 @@
           ></a-entity>
           <a-entity rotation="-45 135 0"
             ><a-image
-              src="./assets/fotografias_webp/20.webp"
+              src="#foto20"
               position="0 0 -3"
               width="2"
               height="2.5"
@@ -442,7 +396,7 @@
           ></a-entity>
           <a-entity rotation="-45 180 0"
             ><a-image
-              src="./assets/fotografias_webp/21.webp"
+              src="#foto21"
               position="0 0 -3"
               width="2"
               height="2.5"
@@ -450,7 +404,7 @@
           ></a-entity>
           <a-entity rotation="-45 225 0"
             ><a-image
-              src="./assets/fotografias_webp/22.webp"
+              src="#foto22"
               position="0 0 -3"
               width="2"
               height="2.5"
@@ -458,7 +412,7 @@
           ></a-entity>
           <a-entity rotation="-45 270 0"
             ><a-image
-              src="./assets/fotografias_webp/23.webp"
+              src="#foto23"
               position="0 0 -3"
               width="2"
               height="2.5"
@@ -466,7 +420,7 @@
           ></a-entity>
           <a-entity rotation="-45 315 0"
             ><a-image
-              src="./assets/fotografias_webp/24.webp"
+              src="#foto24"
               position="0 0 -3"
               width="2"
               height="2.5"
@@ -476,34 +430,6 @@
       </a-scene>
     </div>
 
-    <script>
-      (() => {
-        const envelope = document.getElementById('romantic-envelope');
-
-        window.abrirSobre = () => {
-          if (!envelope.classList.contains('envelope-open')) {
-            envelope.classList.add('envelope-open');
-          }
-        };
-
-        window.cerrarSobre = () => {
-          envelope.classList.remove('envelope-open');
-        };
-
-        window.toggleSobre = () => {
-          if (envelope.classList.contains('envelope-open')) {
-            window.cerrarSobre();
-          } else {
-            window.abrirSobre();
-          }
-        };
-
-        envelope.addEventListener('click', (e) => {
-          if (e.target.closest('#open-proposal-btn')) return;
-          if (!envelope.classList.contains('envelope-open')) window.abrirSobre();
-        });
-      })();
-    </script>
     <script src="app.js"></script>
   </body>
 </html>

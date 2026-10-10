@@ -1,6 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const btnComenzar = document.getElementById("open-proposal-btn");
-  const textoCarga = document.getElementById("texto-carga");
+  const btnComenzar = document.getElementById("letterBtn");
+  const envelope = document.getElementById("envelope");
+  const waxSealBtn = document.getElementById("waxSealBtn");
+  const flapTop = document.getElementById("flapTop");
   const pantallaInicio = document.getElementById("pantalla-inicio");
   const carrusel = document.getElementById("carrusel");
   const cancion = document.getElementById("cancion");
@@ -8,12 +10,34 @@ document.addEventListener("DOMContentLoaded", () => {
   const videoFondo = document.getElementById("camara-fondo");
   const assets = document.querySelector("a-assets");
 
-  // Liberar el botón solo cuando todos los archivos estén descargados
-  assets.addEventListener("loaded", () => {
-    if (textoCarga) textoCarga.style.display = "none";
-  });
+  // Control de apertura y cierre del sobre
+  function abrirSobre() {
+    if (envelope) envelope.classList.add("open");
+  }
 
-  // Cronología estricta de las letras de la canción
+  function cerrarSobre() {
+    if (envelope) envelope.classList.remove("open");
+  }
+
+  if (waxSealBtn) {
+    waxSealBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      abrirSobre();
+    });
+  }
+
+  if (flapTop) {
+    flapTop.addEventListener("click", (e) => {
+      e.stopPropagation();
+      if (envelope && envelope.classList.contains("open")) {
+        cerrarSobre();
+      } else {
+        abrirSobre();
+      }
+    });
+  }
+
+  // Cronología de letras sincronizadas con la música
   const lineasLetra = [
     { id: "ent-letra1", inicio: 8, fin: 11 },
     { id: "ent-letra2", inicio: 12, fin: 15 },
@@ -27,59 +51,73 @@ document.addEventListener("DOMContentLoaded", () => {
   ];
 
   let granFinalMostrado = false;
+  let arIniciado = false;
 
-  btnComenzar.addEventListener("click", () => {
-    // 1. Animación de abrir la carta
-    const envelope = document.getElementById("envelope");
-    if (envelope) envelope.classList.add("open");
+  // Función principal para iniciar la experiencia AR
+  const iniciarExperienciaAR = () => {
+    if (arIniciado) return;
+    arIniciado = true;
 
-    // Esperar a que termine de abrirse la carta (aprox 2s)
-    setTimeout(async () => {
-      // 2. Solicitar cámara
-      try {
-        const stream = await navigator.mediaDevices.getUserMedia({
-          video: { facingMode: "environment" },
-        });
-        videoFondo.srcObject = stream;
-      } catch (err) {
-        alert("Por favor, acepta los permisos de la cámara para la sorpresa.");
-        return;
-      }
+    // 1. Activar la cámara en segundo plano si está disponible
+    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+      navigator.mediaDevices.getUserMedia({
+        video: { facingMode: "environment" },
+      }).then((stream) => {
+        if (videoFondo) videoFondo.srcObject = stream;
+      }).catch((err) => {
+        console.warn("Cámara no disponible o permisos denegados:", err);
+      });
+    }
 
-      // 3. Ocultar menú suavemente e iniciar AR
+    // 2. Transición suave de la pantalla de inicio
+    if (pantallaInicio) {
+      pantallaInicio.style.transition = "opacity 0.8s ease-in-out";
       pantallaInicio.style.opacity = "0";
+    }
 
-      setTimeout(() => {
-        pantallaInicio.style.display = "none";
-        carrusel.setAttribute("visible", "true");
-        cancion.play();
-
-        // Iniciar la animación del modelo 3D
+    // 3. Activar escena 3D, música y animación
+    setTimeout(() => {
+      if (pantallaInicio) pantallaInicio.style.display = "none";
+      if (carrusel) carrusel.setAttribute("visible", "true");
+      if (cancion) {
+        cancion.play().catch((err) => console.log("Audio play error:", err));
+      }
+      if (pinguinoGuia) {
         pinguinoGuia.setAttribute(
           "animation-mixer",
           "clip: *; loop: once; clampWhenFinished: true;",
         );
-      }, 1000); // 1 segundo para el fade-out
-    }, 2000); // 2 segundos admirando la carta abierta
+      }
+    }, 800);
+  };
 
-    // 4. Reloj central: Supervisa cada milisegundo de la canción
+  // El botón dentro de la carta inicia el AR
+  if (btnComenzar) {
+    btnComenzar.addEventListener("click", (e) => {
+      e.stopPropagation();
+      iniciarExperienciaAR();
+    });
+  }
+
+  // Supervisión del tiempo de la canción para mostrar letras
+  if (cancion) {
     cancion.addEventListener("timeupdate", () => {
       const tiempoActual = cancion.currentTime;
 
-      // Controlador matemático de letras (Giroscopio dirigido)
       lineasLetra.forEach((linea) => {
         const elemento = document.getElementById(linea.id);
-        if (tiempoActual >= linea.inicio && tiempoActual <= linea.fin) {
-          elemento.setAttribute("visible", "true");
-        } else {
-          elemento.setAttribute("visible", "false");
+        if (elemento) {
+          if (tiempoActual >= linea.inicio && tiempoActual <= linea.fin) {
+            elemento.setAttribute("visible", "true");
+          } else {
+            elemento.setAttribute("visible", "false");
+          }
         }
       });
 
-      // 4. El Gran Final Inolvidable (Después del segundo 45)
       if (tiempoActual >= 46 && !granFinalMostrado) {
         granFinalMostrado = true;
       }
     });
-  });
+  }
 });
